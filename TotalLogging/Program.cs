@@ -133,7 +133,7 @@ internal class Program
 			SyntaxFactory.Identifier("aopex"));
 
 		BlockSyntax catchBlock = SyntaxFactory.Block(
-			SyntaxFactory.ParseStatement("RoslynGeneratorData.Logger.Instance.OnError(aopex);"),
+			SyntaxFactory.ParseStatement("RoslynAspector.TotalLoggingData.Logger.Instance.OnError(aopex);"),
 			SyntaxFactory.ParseStatement("throw;"));
 
 		CatchClauseSyntax catchClause = SyntaxFactory.CatchClause()
@@ -141,7 +141,7 @@ internal class Program
 			.WithBlock(catchBlock);
 
 		BlockSyntax finallyBlock = SyntaxFactory.Block(
-			SyntaxFactory.ParseStatement("RoslynGeneratorData.Logger.Instance.OnExit();"));
+			SyntaxFactory.ParseStatement("RoslynAspector.TotalLoggingData.Logger.Instance.OnExit();"));
 
 		TryStatementSyntax tryCatchFinally = SyntaxFactory.TryStatement(
 			tryBlock,
@@ -156,7 +156,7 @@ internal class Program
 		IEnumerable<ParameterSyntax> filteredParameters = parameters.Where(param =>
 				!param.Modifiers.Any(SyntaxKind.OutKeyword) &&
 				!param.AttributeLists.Any(attrList =>
-					attrList.Attributes.Any(attr => attr.Name.ToString() == "IgnoreParameter")))
+					attrList.Attributes.Any(attr => attr.Name.ToString() == "LogIgnoreParameter")))
 			.Take(20);
 
 		SeparatedSyntaxList<ArgumentSyntax> arguments = SyntaxFactory.SeparatedList(
@@ -166,7 +166,7 @@ internal class Program
 		InvocationExpressionSyntax onEnterInvocation = SyntaxFactory.InvocationExpression(
 				SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
 					SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
-						SyntaxFactory.IdentifierName("RoslynGeneratorData"),
+						SyntaxFactory.IdentifierName("RoslynAspector.TotalLoggingData"),
 						SyntaxFactory.IdentifierName("Logger")),
 					SyntaxFactory.IdentifierName("Instance.OnEnter")))
 			.WithArgumentList(SyntaxFactory.ArgumentList(arguments));
