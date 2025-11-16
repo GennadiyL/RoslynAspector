@@ -183,6 +183,20 @@ internal class Program
 
 	private static TryStatementSyntax CreateTryCatchFinallyStatement(BlockSyntax tryBlock, MethodLogInfo logInfo)
 	{
+		CatchClauseSyntax catchBlock = CreateCatchBlock(logInfo);
+
+		BlockSyntax finallyBlock = CreateFinallyBlock(logInfo);
+
+		TryStatementSyntax tryCatchFinallyStatement = SyntaxFactory.TryStatement(
+			tryBlock,
+			SyntaxFactory.List(new[] { catchBlock }),
+			SyntaxFactory.FinallyClause(finallyBlock));
+
+		return tryCatchFinallyStatement;
+	}
+
+	private static CatchClauseSyntax CreateCatchBlock(MethodLogInfo logInfo)
+	{
 		CatchDeclarationSyntax catchDeclaration = SyntaxFactory.CatchDeclaration(
 			SyntaxFactory.ParseTypeName("System.Exception").WithTrailingTrivia(SyntaxFactory.Space),
 			SyntaxFactory.Identifier("aopex"));
@@ -216,7 +230,11 @@ internal class Program
 		CatchClauseSyntax catchBlock = SyntaxFactory.CatchClause()
 			.WithDeclaration(catchDeclaration)
 			.WithBlock(catchBody);
+		return catchBlock;
+	}
 
+	private static BlockSyntax CreateFinallyBlock(MethodLogInfo logInfo)
+	{
 		BlockSyntax finallyBlock = SyntaxFactory.Block(
 			SyntaxFactory.ExpressionStatement(
 				SyntaxFactory.InvocationExpression(
@@ -238,13 +256,7 @@ internal class Program
 					)
 			)
 		);
-
-		TryStatementSyntax tryCatchFinallyStatement = SyntaxFactory.TryStatement(
-			tryBlock,
-			SyntaxFactory.List(new[] { catchBlock }),
-			SyntaxFactory.FinallyClause(finallyBlock));
-
-		return tryCatchFinallyStatement;
+		return finallyBlock;
 	}
 
 	private static bool IsProjectProcessingRequired(Project project)

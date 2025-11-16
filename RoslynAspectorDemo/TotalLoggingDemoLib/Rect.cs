@@ -1,5 +1,3 @@
-using RoslynAspector.TotalLoggingData;
-
 namespace TotalLoggingDemoLib;
 
 public class Rect
@@ -36,7 +34,7 @@ public class Rect
 		return Top + Height;
 	}
 
-	public async Task MoveAsync([LogIgnoreParameter] int dx, int dy)
+	public async Task MoveAsync([RoslynAspector.TotalLoggingData.LogIgnoreParameter] int dx, int dy)
 	{
 		await Task.Delay(100);
 		MoveInner(dx, dy);
