@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TotalLoggingDemoLib", "Tota
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TotalLoggingDemoApp", "TotalLoggingDemoApp\TotalLoggingDemoApp.csproj", "{C4650EEC-6290-2D1F-7711-2024E220B71B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TotalLoggingData", "..\RoslynAspector\TotalLoggingData\TotalLoggingData.csproj", "{4A7697D8-EB76-62F2-76B8-355D7298FBA3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C4650EEC-6290-2D1F-7711-2024E220B71B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4650EEC-6290-2D1F-7711-2024E220B71B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4650EEC-6290-2D1F-7711-2024E220B71B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A7697D8-EB76-62F2-76B8-355D7298FBA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A7697D8-EB76-62F2-76B8-355D7298FBA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A7697D8-EB76-62F2-76B8-355D7298FBA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A7697D8-EB76-62F2-76B8-355D7298FBA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
