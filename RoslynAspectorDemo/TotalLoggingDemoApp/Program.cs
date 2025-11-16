@@ -1,3 +1,4 @@
+using RoslynAspector.TotalLoggingData;
 using TotalLoggingDemoLib;
 
 namespace TotalLoggingDemoApp;
@@ -6,6 +7,8 @@ internal class Program
 {
 	private static async Task Main()
 	{
+		LogWrapper.Configure(new ConsoleLogger());
+		
 		Rect rect = new Rect();
 		rect.Left = 10;
 		rect.Top = 20;
