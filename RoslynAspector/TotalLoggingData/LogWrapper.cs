@@ -447,7 +447,7 @@ namespace RoslynAspector.TotalLoggingData
 		}
 
 		public static void OnError(
-			Exception? ex,
+			Exception ex,
 			LogWrapperLevel level,
 			bool isExceptionLoggingEnabled,
 			[CallerFilePath] string file = "",
