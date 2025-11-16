@@ -13,6 +13,17 @@ internal class Program
 
 	public static async Task Main(string[] args)
 	{
+		if (args.Length < 1)
+		{
+			Console.WriteLine("Incorrect command line. First argument must be path to the solution");
+		}
+
+		string solutionPath = args[0];
+		if (!File.Exists(solutionPath))
+		{
+			Console.WriteLine("Incorrect command line. First argument must be path to the solution");
+		}
+
 		MSBuildLocator.RegisterDefaults();
 		MSBuildWorkspace workspace = MSBuildWorkspace.Create();
 
@@ -178,7 +189,7 @@ internal class Program
 
 	private static bool IsProjectProcessingRequired(Project project)
 	{
-		if (project.Documents.FirstOrDefault(d => d.Name.Contains("AspectApply")) != null)
+		if (project.Documents.FirstOrDefault(d => d.Name.EndsWith("TotalLoggingAspectApply.cs")) != null)
 		{
 			return true;
 		}

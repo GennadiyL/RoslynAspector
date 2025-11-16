@@ -449,13 +449,13 @@ namespace RoslynAspector.TotalLoggingData
 		public static void OnError(
 			Exception? ex,
 			LogWrapperLevel level,
-			bool isWriteException,
+			bool isExceptionLoggingEnabled,
 			[CallerFilePath] string file = "",
 			[CallerMemberName] string member = "",
 			[CallerLineNumber] int line = 0)
 		{
 			if (_adapter.Level <= level)
-				Write("OnError", isWriteException ? ex : null, level, file, member, line);
+				Write("OnError", isExceptionLoggingEnabled ? ex : null, level, file, member, line);
 		}
 
 		public static void OnExit(
