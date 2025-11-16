@@ -27,7 +27,6 @@ internal class Program
 
 	private static string GetSolutionPath(string[] args)
 	{
-		return @"s:\\Gena\Local\Work\_Drive\Projects\Learning\Programming\Aop\Git\RoslynAspector\RoslynAspectorDemo\RoslynAspectorDemo.sln";
 		if (args.Length < 1)
 		{
 			throw new ArgumentException("\"First argument must be a path to the solution.\"");
