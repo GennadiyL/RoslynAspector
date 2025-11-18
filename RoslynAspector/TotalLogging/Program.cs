@@ -27,6 +27,7 @@ internal class Program
 
 	private static string GetSolutionPath(string[] args)
 	{
+		//return @"s:\\Gena\Local\Work\_Drive\Projects\Learning\Programming\Aop\Git\RoslynAspector\RoslynAspectorDemo\RoslynAspectorDemo.sln";
 		if (args.Length < 1)
 		{
 			throw new ArgumentException("\"First argument must be a path to the solution.\"");
@@ -288,10 +289,15 @@ internal class Program
 		if (method.Identifier.Text == "ToString")
 			return null;
 
+		SyntaxTokenList modifiers = method.Modifiers;
+		bool isPublic = modifiers.Any(m => m.IsKind(SyntaxKind.PublicKeyword));
+		bool isInstance = !modifiers.Any(m => m.IsKind(SyntaxKind.StaticKeyword));
+		LogWrapperLevel onEnterLogLevel = isPublic && isInstance ? LogWrapperLevel.Warning : LogWrapperLevel.Information;
+
 		return new MethodLogInfo
 		{
 			IsExceptionLoggingEnabled = true,
-			OnEnterLogLevel = LogWrapperLevel.Warning,
+			OnEnterLogLevel = onEnterLogLevel,
 			OnExitLogLevel = LogWrapperLevel.Information,
 			OnErrorLogLevel = LogWrapperLevel.Error
 		};
