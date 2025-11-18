@@ -292,11 +292,13 @@ internal class Program
 		SyntaxTokenList modifiers = method.Modifiers;
 		bool isPublic = modifiers.Any(m => m.IsKind(SyntaxKind.PublicKeyword));
 		bool isInstance = !modifiers.Any(m => m.IsKind(SyntaxKind.StaticKeyword));
+		
 		LogWrapperLevel onEnterLogLevel = isPublic && isInstance ? LogWrapperLevel.Warning : LogWrapperLevel.Information;
-
+		bool isExceptionLoggingEnabled = isPublic && isInstance;
+		
 		return new MethodLogInfo
 		{
-			IsExceptionLoggingEnabled = true,
+			IsExceptionLoggingEnabled = isExceptionLoggingEnabled,
 			OnEnterLogLevel = onEnterLogLevel,
 			OnExitLogLevel = LogWrapperLevel.Information,
 			OnErrorLogLevel = LogWrapperLevel.Error
